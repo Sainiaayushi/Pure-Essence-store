@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Pure-Essence</title>
+    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <form id="signup-form">
+            <div class="input-box">
+                <i class="fas fa-user"></i>
+                <input type="text" id="name" placeholder="Full Name" autocomplete="name">
+            </div>
+            <div class="input-box">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" placeholder="Email Address" autocomplete="email">
+            </div>
+            <div class="input-box">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" placeholder="Password" required autocomplete="password">
+            </div>
+            <div class="input-box">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="confirmpassword" placeholder="Confirm Password" autocomplete="confirm-password">
+            </div>
+            <button type="submit" class="signup-btn">Sign Up</button>
+            <p>Already have an account? <a href="login.html">Login</a></p>
+        </form>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>

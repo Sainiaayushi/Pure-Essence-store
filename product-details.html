@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="product-detail.css">
+    <script src="scripts.js" defer></script>
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Home</a>
+    </nav>
+
+    <div class="product-container">
+        <!-- Product Image -->
+        <div class="product-image">
+            <img id="main-product-image" src="img/calender.jpg" alt="Product Name">
+            <div class="similar-images">
+                <img src="img/april.jpg"  onclick="changeImage('img/april.jpg')">
+                <img src="img/aug.jpg"  onclick="changeImage('img/aug.jpg')">
+                <img src="img/july.jpg" onclick="changeImage('img/july.jpg')">
+            </div>
+        </div>
+
+        <!-- Product Details -->
+        <div class="product-info">
+            <h1>Calender</h1>
+            <p class="price">$99.99</p>
+            <p class="description">This is a high-quality product with amazing features.</p>
+            
+            <!-- Pin Code Checker -->
+            <div class="pin-code">
+                <input type="text" id="pin-code" placeholder="Enter Pin Code" required>
+                <button onclick="checkPin()">Check</button>
+                <p id="pin-result"></p>
+            </div>
+
+            <button class="buy-btn">Buy Now</button>
+        </div>
+    </div>
+
+    <!-- Review Section -->
+    <div class="review-section">
+        <h2>Customer Reviews</h2>
+        <div id="reviews"></div>
+        <textarea id="review-input" placeholder="Write a review..."></textarea>
+        <button onclick="addReview()">Submit</button>
+    </div>
+
+<footer></footer>
+</body>
+</html>
+
+
+
