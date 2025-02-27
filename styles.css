@@ -40,13 +40,21 @@ header {
     background-color: #fff;
     padding: 10px 0;
     border-bottom: 2px solid #f3e5d8;
+    height: 5vh;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 50px;
+    padding: 0 50px;
+    position: relative;
+    bottom: 10px;
+    
 }
 
 .logo {
@@ -124,30 +132,6 @@ nav {
     cursor: pointer;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        background: white;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        text-align: center;
-        padding: 10px 0;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .menu-icon {
-        display: block;
-    }
-}
-
 
 /* Hero Section */
 .hero {
@@ -156,6 +140,7 @@ nav {
     align-items: center;
     padding: 50px;
     background: #fffbf7;
+    padding-top: 98px;
 }
 
 
@@ -245,7 +230,7 @@ html {
 /* Contact Us Section */
 .contact {
     text-align: center;
-    padding: 50px;
+    padding: 25px;
     background: #e8e8e8;
 }
 
@@ -253,6 +238,7 @@ html {
     display: flex;
     justify-content: center;
     gap: 60px;
+    padding-top: 10px;
 }
 .contact-container a{
  text-decoration: none;
@@ -382,7 +368,51 @@ footer {
         padding: 8px 15px;
         font-size: 14px;
     }
+    nav {
+        
+        top: 14px;
+        
+    }
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background: white;
+        position: absolute;
+        top: 22px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+    .hero{
+        padding-top: 56px;
+    }
+    .hero-text {
+        font-size: 9px;
+    }
+    
+    .hero-images img {
+       width: 143px;
+    border-radius: 10px;
+    height: 20vh;
+    position: relative;
+    top: 33px;
+    }
+    .offer-image img {
+        width: 120px;
+    }
+
 }
+
 
 
 

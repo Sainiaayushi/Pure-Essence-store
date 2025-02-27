@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details</title>
     <link rel="stylesheet" href="product-detail.css">
+    <link rel="stylesheet" href="styles.css">
     <script src="scripts.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
-    
-    <nav class="second-nav">
-        <ul>
-            <div class="logo">Pure-Essence</div>
-            <li><a href="index.html">Home</a></li>
-           
-        </ul>
-    </nav>
+    <header>
+        <nav>
+            <div class="logo">Pure <span>Essence</span></div>
+            <div class="menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+        </nav>
+    </header>
 
     <div class="product-container">
         <div class="product-image">
@@ -29,13 +36,13 @@
             <h1 id="product-name"></h1>
             <p class="price" id="product-price"></p>
             <p class="description" id="product-description"></p>
-            
+
             <div class="pin-code">
                 <input type="text" id="pin-code" placeholder="Enter Pin Code" required>
                 <button onclick="checkPin()">Check</button>
                 <p id="pin-result"></p>
             </div>
-            
+
             <button id="buy-now" class="buy-btn">Buy Now</button>
         </div>
     </div>
@@ -44,19 +51,23 @@
         <h2>Customer Reviews</h2>
         <div id="reviews"></div>
         <textarea id="review-input" placeholder="Write a review..."></textarea>
-        <button onclick="addReview()">Submit</button>
+        <button  class="btn" onclick="addReview()">Submit</button>
     </div>
 
     <script>
         const products = [
-            { id: 0, name: "Product 1", description: "Description of product 1.", price: "$10.00", image: "img/calender.jpg", similar: ["img/april.jpg", "img/aug.jpg", "img/july.jpg"] },
-            { id: 1, name: "Product 2", description: "Description of product 2.", price: "$20.00", image: "img/list1.jpg", similar: ["img/list2.jpg", "img/list3.jpg"] },
-            { id: 2, name: "Product 3", description: "Description of product 3.", price: "$30.00", image: "img/weekly2.jpg", similar: ["img/weekly1.jpg", "img/weekly3.jpg"] },
-            { id: 3, name: "Product 4", description: "Description of product 4.", price: "$40.00", image: "img/daily-front.jpg", similar: ["img/daily1.jpg", "img/daily2.jpg"] },
-            { id: 4, name: "Product 5", description: "Description of product 5.", price: "$30.00", image: "img/memo1.jpg", similar: ["img/memo1.jpg", "img/memo2.jpg"] },
-            { id: 5, name: "Product 6", description: "Description of product 6.", price: "$20.00", image: "img/feb.jpg", similar: ["img/april.jpg", "img/aug.jpg"] },
-            { id: 6, name: "Product 7", description: "Description of product 7.", price: "$30.00", image: "img/march.jpg", similar: ["img/july.jpg", "img/aug.jpg"] },
-            { id: 7, name: "Product 8", description: "Description of product 8.", price: "$10.00", image: "img/june.jpg", similar: ["img/april.jpg", "img/jan.jpg"] },
+            { id: 0, name: "Calender", description: "Description of product 1.", price: "₹210.00", image: "img/calender.jpg", similar: ["img/april.jpg", "img/aug.jpg", "img/july.jpg"] },
+            { id: 1, name: "Lists", description: "Description of product 2.", price: "₹120.00", image: "img/list1.jpg", similar: ["img/list2.jpg", "img/list3.jpg"] },
+            { id: 2, name: "Weekly  Planner", description: "Description of product 3.", price: "₹215.00", image: "img/weekly2.jpg", similar: ["img/weekly1.jpg", "img/weekly3.jpg"] },
+            { id: 3, name: "Daily-Planner", description: "Description of product 4.", price: "₹315.00", image: "img/daily-front.jpg", similar: ["img/daily1.jpg", "img/daily2.jpg"] },
+            { id: 4, name: "Memo", description: "Description of product 5.", price: "₹200.00", image: "img/memo1.jpg", similar: ["img/memo1.jpg", "img/memo2.jpg"] },
+            { id: 5, name: "Calenders", description: "Description of product 6.", price: "₹100.00", image: "img/feb.jpg", similar: ["img/april.jpg", "img/aug.jpg"] },
+            { id: 6, name: "Calenders", description: "Description of product 7.", price: "₹115.00", image: "img/march.jpg", similar: ["img/july.jpg", "img/aug.jpg"] },
+            { id: 7, name: "Calenders", description: "Description of product 8.", price: "₹100.00", image: "img/june.jpg", similar: ["img/calender.jpg", "img/june.jpg"] },
+            { id: 8, name: "Daily-Planner", description: "Description of product 9.", price: "₹150.00", image: "img/daily1.jpg", similar: ["img/daily1.jpg", "img/daily2.jpg"] },
+            { id: 9, name: "Memo", description: "Description of product 10.", price: "₹200.00", image: "img/memo1.jpg", similar: ["img/memo1.jpg", "img/memo2.jpg"] },
+            { id: 10, name: "Weekly-Planner", description: "Description of product 11.", price: "₹300.00", image: "img/weekly1.jpg", similar: ["img/weekly1.jpg", "img/weekly2.jpg"] },
+            { id: 11, name: "Yearly-Planner", description: "Description of product 12.", price: "₹140.00", image: "img/yearly1.jpg", similar: ["img/yearly1.jpg", "img/yearly2.jpg"] },
         ];
 
         function getProductIdFromURL() {
@@ -73,7 +84,7 @@
                 document.getElementById("product-description").textContent = product.description;
                 document.getElementById("product-price").textContent = product.price;
                 document.getElementById("product-image").src = product.image;
-                
+
                 const similarContainer = document.getElementById("similar-images");
                 similarContainer.innerHTML = "";
                 product.similar.forEach(img => {
@@ -89,4 +100,5 @@
     </script>
 
 </body>
+
 </html>
