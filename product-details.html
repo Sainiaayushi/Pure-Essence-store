@@ -6,53 +6,40 @@
     <title>Product Details</title>
     <link rel="stylesheet" href="product-detail.css">
     <script src="scripts.js" defer></script>
-   <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-
-    <nav>
-        <a href="index.html">Home</a>
+    
+    <nav class="second-nav">
+        <ul>
+            <div class="logo">Pure-Essence</div>
+            <li><a href="index.html">Home</a></li>
+           
+        </ul>
     </nav>
 
     <div class="product-container">
-        <!-- Product Image -->
         <div class="product-image">
-            <img id="main-product-image" src="img/calender.jpg" alt="Product Name">
-            <div class="similar-images">
-                <img src="img/april.jpg"  onclick="changeImage('img/april.jpg')">
-                <img src="img/aug.jpg"  onclick="changeImage('img/aug.jpg')">
-                <img src="img/july.jpg" onclick="changeImage('img/july.jpg')">
-            </div>
+            <img id="product-image" src="" alt="Product Image" width="300px" height="250px">
+            <div class="similar-images" id="similar-images"></div>
         </div>
-
-        <!-- Product Details -->
         <div class="product-info">
-            <h1>Calender</h1>
-            <p class="price">$99.99</p>
-            <p class="description">This is a high-quality product with amazing features.</p>
+            <h1 id="product-name"></h1>
+            <p class="price" id="product-price"></p>
+            <p class="description" id="product-description"></p>
             
-            <!-- Pin Code Checker -->
             <div class="pin-code">
                 <input type="text" id="pin-code" placeholder="Enter Pin Code" required>
                 <button onclick="checkPin()">Check</button>
                 <p id="pin-result"></p>
             </div>
-
-            <button class="buy-btn">Buy Now</button>
+            
+            <button id="buy-now" class="buy-btn">Buy Now</button>
         </div>
     </div>
 
-    <!-- Review Section -->
     <div class="review-section">
         <h2>Customer Reviews</h2>
         <div id="reviews"></div>
@@ -60,9 +47,46 @@
         <button onclick="addReview()">Submit</button>
     </div>
 
-<footer></footer>
+    <script>
+        const products = [
+            { id: 0, name: "Product 1", description: "Description of product 1.", price: "$10.00", image: "img/calender.jpg", similar: ["img/april.jpg", "img/aug.jpg", "img/july.jpg"] },
+            { id: 1, name: "Product 2", description: "Description of product 2.", price: "$20.00", image: "img/list1.jpg", similar: ["img/list2.jpg", "img/list3.jpg"] },
+            { id: 2, name: "Product 3", description: "Description of product 3.", price: "$30.00", image: "img/weekly2.jpg", similar: ["img/weekly1.jpg", "img/weekly3.jpg"] },
+            { id: 3, name: "Product 4", description: "Description of product 4.", price: "$40.00", image: "img/daily-front.jpg", similar: ["img/daily1.jpg", "img/daily2.jpg"] },
+            { id: 4, name: "Product 5", description: "Description of product 5.", price: "$30.00", image: "img/memo1.jpg", similar: ["img/memo1.jpg", "img/memo2.jpg"] },
+            { id: 5, name: "Product 6", description: "Description of product 6.", price: "$20.00", image: "img/feb.jpg", similar: ["img/april.jpg", "img/aug.jpg"] },
+            { id: 6, name: "Product 7", description: "Description of product 7.", price: "$30.00", image: "img/march.jpg", similar: ["img/july.jpg", "img/aug.jpg"] },
+            { id: 7, name: "Product 8", description: "Description of product 8.", price: "$10.00", image: "img/june.jpg", similar: ["img/april.jpg", "img/jan.jpg"] },
+        ];
+
+        function getProductIdFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return parseInt(urlParams.get('id'), 10);
+        }
+
+        window.onload = function () {
+            const productId = getProductIdFromURL();
+            const product = products.find(p => p.id === productId);
+
+            if (product) {
+                document.getElementById("product-name").textContent = product.name;
+                document.getElementById("product-description").textContent = product.description;
+                document.getElementById("product-price").textContent = product.price;
+                document.getElementById("product-image").src = product.image;
+                
+                const similarContainer = document.getElementById("similar-images");
+                similarContainer.innerHTML = "";
+                product.similar.forEach(img => {
+                    let imgElement = document.createElement("img");
+                    imgElement.src = img;
+                    imgElement.onclick = () => document.getElementById("product-image").src = img;
+                    similarContainer.appendChild(imgElement);
+                });
+            } else {
+                document.body.innerHTML = "<h2>Product Not Found</h2>";
+            }
+        };
+    </script>
+
 </body>
 </html>
-
-
-

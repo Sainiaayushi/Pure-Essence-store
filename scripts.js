@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
 // Change Main Product Image
 function changeImage(imageSrc) {
     document.getElementById("main-product-image").src = imageSrc;
+   
 }
 
 // Pin Code Checker
