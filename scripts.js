@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
     const menuIcon = document.querySelector(".menu-icon");
     const navLinks = document.querySelector(".nav-links");
@@ -142,4 +143,3 @@ function isValidEmail(email) {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
 }
-
