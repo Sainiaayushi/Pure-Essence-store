@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Cart</title>
+  <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+ 
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Pure <span>Essence</span></div>
+            <div class="menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <ul class="nav-links">
+             
+                <li><a href="#home">Home</a></li>
+              
+            </ul>
+            <div class="icons">
+            
+                <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                <a href="#"><i class="fas fa-user"></i></a>
+            </div>
+            
+        </nav>
+    </header>
+    <h1>Shopping Cart</h1>
+    <div class="container">
+        <section class="cart-items" id="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </section>
+        
+        <section class="order-section" id="order-section">
+            <h2>Order Details</h2>
+            <form id="order-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+                
+                <label for="address">Address:</label>
+                <textarea id="address" required></textarea>
+                
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" required>
+                  <!-- Payment Section -->
+                  <h2>Payment Method</h2>
+                  <label>
+                      <input type="radio" name="payment-method" value="card" required> Credit/Debit Card
+                  </label>
+                  <label>
+                      <input type="radio" name="payment-method" value="upi"> UPI
+                  </label>
+                  <label>
+                      <input type="radio" name="payment-method" value="cod"> Cash on Delivery
+                  </label>
+  
+                  <!-- Payment Details (Hidden Initially) -->
+                  <div id="payment-details" style="display: none;">
+                      <div id="card-details" style="display: none;">
+                          <label for="card-number">Card Number:</label>
+                          <input type="text" id="card-number" maxlength="16">
+  
+                          <label for="expiry">Expiry Date:</label>
+                          <input type="month" id="expiry">
+  
+                          <label for="cvv">CVV:</label>
+                          <input type="password" id="cvv" maxlength="3">
+                      </div>
+  
+                      <div id="upi-details" style="display: none;">
+                          <label for="upi-id">UPI ID:</label>
+                          <input type="text" id="upi-id" placeholder="example@upi">
+                      </div>
+                  </div>
+                
+              <a href="confirmation.html">  <button type="submit">Confirm  Order</button></a>
+            </form>
+        </section>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartItemsContainer = document.getElementById("cart-items");
+    
+            function displayCart() {
+                cartItemsContainer.innerHTML = "";
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+                    return;
+                }
+                cart.forEach((item, index) => {
+                    const itemDiv = document.createElement("div");
+                    itemDiv.innerHTML = `
+                        <span>${item.name} - ${item.price} x ${item.quantity}</span>
+                        <button onclick="removeItem(${index})">Remove</button>
+                    `;
+                    cartItemsContainer.appendChild(itemDiv);
+                });
+            }
+    
+            window.removeItem = function(index) {
+                cart.splice(index, 1);
+                localStorage.setItem("cart", JSON.stringify(cart));
+                displayCart();
+            };
+    
+            document.getElementById("order-form").addEventListener("submit", function(event) {
+                event.preventDefault();
+    
+                let customerDetails = {
+                    name: document.getElementById("name").value,
+                    address: document.getElementById("address").value,
+                    phone: document.getElementById("phone").value
+                };
+    
+                if (cart.length === 0) {
+                    alert("Your cart is empty!");
+                    return;
+                }
+    
+                localStorage.setItem("customerDetails", JSON.stringify(customerDetails));
+                window.location.href = "confirmation.html";
+            });
+    
+            displayCart();
+        });
+    </script>
+    
+    
+</body>
+</html>

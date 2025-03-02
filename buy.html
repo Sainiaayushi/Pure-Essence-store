@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Now</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Pure <span>Essence</span></div>
+            <div class="menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+            </ul>
+            <div class="icons">
+                <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                <a href="#"><i class="fas fa-user"></i></a>
+            </div>
+        </nav>
+    </header>
+
+    <h1>Shopping Cart</h1>
+    <div class="container">
+        <section class="product-details" id="product-details">
+            <!-- Product details will be dynamically added here -->
+        </section>
+        
+        <section class="order-section" id="order-section">
+            <h2>Order Details</h2>
+            <form id="order-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+                
+                <label for="address">Address:</label>
+                <textarea id="address" required></textarea>
+                
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" required>
+
+                <!-- Payment Section -->
+                <h2>Payment Method</h2>
+                <label>
+                    <input type="radio" name="payment-method" value="card" required> Credit/Debit Card
+                </label>
+                <label>
+                    <input type="radio" name="payment-method" value="upi"> UPI
+                </label>
+                <label>
+                    <input type="radio" name="payment-method" value="cod"> Cash on Delivery
+                </label>
+
+                <!-- Payment Details (Hidden Initially) -->
+                <div id="payment-details" style="display: none;">
+                    <div id="card-details" style="display: none;">
+                        <label for="card-number">Card Number:</label>
+                        <input type="text" id="card-number" maxlength="16">
+
+                        <label for="expiry">Expiry Date:</label>
+                        <input type="month" id="expiry">
+
+                        <label for="cvv">CVV:</label>
+                        <input type="password" id="cvv" maxlength="3">
+                    </div>
+
+                    <div id="upi-details" style="display: none;">
+                        <label for="upi-id">UPI ID:</label>
+                        <input type="text" id="upi-id" placeholder="example@upi">
+                    </div>
+                </div>
+
+             <a href="confirmation.html"><button type="submit">Confirm Order</button></a>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let paymentMethods = document.getElementsByName("payment-method");
+            let paymentDetails = document.getElementById("payment-details");
+            let cardDetails = document.getElementById("card-details");
+            let upiDetails = document.getElementById("upi-details");
+
+            paymentMethods.forEach(method => {
+                method.addEventListener("change", function() {
+                    paymentDetails.style.display = "block";
+                    if (this.value === "card") {
+                        cardDetails.style.display = "block";
+                        upiDetails.style.display = "none";
+                    } else if (this.value === "upi") {
+                        upiDetails.style.display = "block";
+                        cardDetails.style.display = "none";
+                    } else {
+                        paymentDetails.style.display = "none";
+                        cardDetails.style.display = "none";
+                        upiDetails.style.display = "none";
+                    }
+                });
+            });
+
+            document.getElementById("order-form").addEventListener("submit", function(event) {
+                event.preventDefault();
+                
+                let customerDetails = {
+                    name: document.getElementById("name").value,
+                    address: document.getElementById("address").value,
+                    phone: document.getElementById("phone").value,
+                    paymentMethod: document.querySelector('input[name="payment-method"]:checked').value
+                };
+
+                if (customerDetails.paymentMethod === "card") {
+                    customerDetails.cardNumber = document.getElementById("card-number").value;
+                    customerDetails.expiry = document.getElementById("expiry").value;
+                    customerDetails.cvv = document.getElementById("cvv").value;
+                } else if (customerDetails.paymentMethod === "upi") {
+                    customerDetails.upiId = document.getElementById("upi-id").value;
+                }
+
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+                if (cart.length === 0) {
+                    alert("Your cart is empty!");
+                    return;
+                }
+
+                localStorage.setItem("customerDetails", JSON.stringify(customerDetails));
+                window.location.href = "confirmation.html";
+            });
+        });
+    </script>
+
+</body>
+</html>

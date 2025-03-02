@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="styles.css">
+   <style>
+    /* Confirmation Page Centering */
+.confirmation-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    background-color: #f8f9fa;
+}
+
+/* Checkmark Animation */
+.checkmark {
+    font-size: 4rem;
+    color: #ca723c; /* Green color for success */
+    font-weight: bold;
+    margin-bottom: 20px;
+    opacity: 0;  /* Initially hidden */
+    transform: scale(0); /* Start small */
+    animation: checkmark-pop 0.6s ease-out forwards;
+}
+
+/* Checkmark Pop-in Animation */
+@keyframes checkmark-pop {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Headings & Text */
+h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+    opacity: 0;
+    animation: fade-in 1s ease-out 0.6s forwards; /* Delayed animation */
+}
+
+p {
+    font-size: 1.2rem;
+    color: #555;
+    max-width: 500px;
+    line-height: 1.5;
+    opacity: 0;
+    animation: fade-in 1s ease-out 0.8s forwards; /* Delayed animation */
+}
+
+/* Fade-in Animation */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Return to Home Button */
+.home-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: #e68900;
+    color: white;
+    font-size: 1.2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s ease;
+    opacity: 0;
+    animation: fade-in 1s ease-out 1s forwards; /* Delayed animation */
+}
+
+.home-btn:hover {
+    background: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    p {
+        font-size: 1rem;
+        max-width: 90%;
+    }
+    .home-btn {
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+}
+   </style>
+</head>
+<body>
+
+    <div class="confirmation-container">
+        <div class="checkmark">✔</div>
+        <h1>Order Placed Successfully!</h1>
+        <p>Thank you for your purchase. Your order has been confirmed and will be shipped soon.</p>
+        <a href="index.html" class="home-btn">Return to Home</a>
+    </div>
+    <script>  alert("Order placed successfully!");
+        localStorage.removeItem("cart");</script>
+</body>
+</html>

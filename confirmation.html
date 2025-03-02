@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+    
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Pure <span>Essence</span></div>
+            <div class="menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <ul class="nav-links">
+             
+                <li><a href="#home">Home</a></li>
+              
+            </ul>
+            <div class="icons">
+            
+                <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                <a href="#"><i class="fas fa-user"></i></a>
+            </div>
+            
+        </nav>
+    </header>
+    <div class="invoice-container">
+        <div class="invoice-header">Order Invoice</div>
+        <div class="invoice-details">
+            <p><strong>Name:</strong> <span id="customer-name"></span></p>
+            <p><strong>Address:</strong> <span id="customer-address"></span></p>
+            <p><strong>Phone:</strong> <span id="customer-phone"></span></p>
+        </div>
+        <table class="invoice-items">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="invoice-body">
+                <!-- Items will be added dynamically -->
+            </tbody>
+        </table>
+        <h3>Total: $<span id="total-amount">0.00</span></h3>
+        <p class="confirmation">Thank you for your order! 🎉</p>
+        <a href="confirm.html">  <button type="submit">Place Order</button></a>
+    </div>
+  
+   
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let customerDetails = JSON.parse(localStorage.getItem("customerDetails")) || {};
+    
+            if (!customerDetails.name) {
+                alert("Customer details are missing! Redirecting to cart.");
+                window.location.href = "cart.html"; 
+                return;
+            }
+    
+            document.getElementById("customer-name").innerText = customerDetails.name;
+            document.getElementById("customer-address").innerText = customerDetails.address;
+            document.getElementById("customer-phone").innerText = customerDetails.phone;
+    
+            let invoiceBody = document.getElementById("invoice-body");
+            let totalAmount = 0;
+    
+            if (cart.length === 0) {
+                invoiceBody.innerHTML = "<tr><td colspan='4'>No items in cart.</td></tr>";
+            } else {
+                cart.forEach(item => {
+                    let row = document.createElement("tr");
+                    let itemTotal = item.price * item.quantity;
+                    totalAmount += itemTotal;
+                    row.innerHTML = `
+                        <td>${item.name}</td>
+                        <td>${item.price.toFixed(2)}</td>
+                        <td>${item.quantity}</td>
+                        <td>${itemTotal.toFixed(2)}</td>
+                    `;
+                    invoiceBody.appendChild(row);
+                });
+            }
+    
+            document.getElementById("total-amount").innerText = totalAmount.toFixed(2);
+        });
+       
+    </script>
+    
+</body>
+</html>
